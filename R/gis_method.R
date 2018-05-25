@@ -1,6 +1,6 @@
 pacman::p_load("rgdal","sp","ggmap","ggplot2","maps","plyr","dplyr","reshape2")
 
-# sig_shp <- readOGR("/Users/youngjunna/Github/diffusion_model/R","전국_법정구역정보(시군구)_201510")
+sig_shp <- readOGR("/Users/youngjunna/Google_drive/_R/GIS","전국_법정구역정보(시군구)_201510")
 
 sig_shp@proj4string #origin
 prj_longlat <- CRS("+proj=longlat +datum=WGS84") #경위도 wgs84타원체

@@ -9,7 +9,7 @@ sig_shp@data$id <- rownames(sig_shp@data) #idx 부여
 sig_shp_fortify <- fortify(sig_shp,by="id") #fortify함수 region =  id로
 sig_shp_fortify_join <- join(sig_shp_fortify,sig_shp@data, by="id") #id로 조인!
 
-simple <- rmapshaper::ms_simplify(sig_shp,keep=0.005)
+simple <- rmapshaper::ms_simplify(sig_shp,keep=0.01)
 simple@data$id <- rownames(simple@data) #idx 부여 
 simple_fortify <- fortify(simple,by="id") #fortify함수 region =  id로
 simple_join <- join(simple_fortify,simple@data, by="id") #id로 조인!

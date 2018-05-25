@@ -1,15 +1,15 @@
 # 확산모델 시각화
-pacman::p_load("ggplot2","dplyr","plotly","extrafont")
-farm <- read.csv("merge.txt")
-
+pacman::p_load("ggplot2","dplyr")
 options(scipen=100) #global
-font_import()
 theme_set(theme_bw(base_family="AppleGothic")) #한글깨짐 문제 해결
+load("simple.Rdata")
 
-p <- ggplot(test1, aes(x=long, y=lat, group=group, fill=한우)) + geom_polygon(colour="black") + coord_map()
-p <- ggplot(farm, aes(x=long,y=lat,group=group,fill=한우)) + geom_polygon() + scale_fill_gradientn(colours=c('white','orange','red')) + expand_limits(x=farm$long,y=farm$lat)+ ggtitle("한우두수") + labs(fill="한우 두수")
+# p <- ggplot(test1, aes(x=long, y=lat, group=group, fill=한우)) + geom_polygon(colour="black") + coord_map()
+# p <- ggplot(farm, aes(x=long,y=lat,group=group,fill=한우)) + geom_polygon() + scale_fill_gradientn(colours=c('white','orange','red')) + expand_limits(x=farm$long,y=farm$lat)+ ggtitle("한우두수") + labs(fill="한우 두수")
 
-p1 <- ggplot(farm, aes(x=long,y=lat,group=group,fill=고상.분뇨)) + geom_polygon(colour="grey") + scale_fill_gradientn(colours=c('white','orange','red'))+ expand_limits(x=farm$long,y=farm$lat)+ ggtitle("고상가축분뇨발생(톤/년)") + labs(fill="발생(톤/년)") + theme(axis.line=element_blank(),axis.text.x=element_blank(),axis.text.y=element_blank(),axis.ticks=element_blank(),axis.title.x=element_blank(),axis.title.y=element_blank())
+p1 <- ggplot(merge, aes(x=long,y=lat,group=group,fill=고상.분뇨)) + geom_polygon(colour="grey") + scale_fill_gradientn(colours=c('white','orange','red'))+ expand_limits(x=merge$long,y=merge$lat)+ ggtitle("고상가축분뇨발생(톤/년)") + labs(fill="발생(톤/년)") 
+
+# + theme(axis.line=element_blank(),axis.text.x=element_blank(),axis.text.y=element_blank(),axis.ticks=element_blank(),axis.title.x=element_blank(),axis.title.y=element_blank())
 print(p1)
 
 p2 <- ggplot(farm, aes(x=long,y=lat,group=group,fill=고상.합계.차이)) + geom_polygon(colour="grey") + scale_fill_gradientn(colours=c('blue','white','red'))+ expand_limits(x=farm$long,y=farm$lat)+ ggtitle("고상가축분뇨발생-처리(톤/년)") + labs(fill="Difference") + theme(axis.line=element_blank(),axis.text.x=element_blank(),axis.text.y=element_blank(),axis.ticks=element_blank(),axis.title.x=element_blank(),axis.title.y=element_blank())
