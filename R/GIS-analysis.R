@@ -38,5 +38,15 @@ merge <- mutate(merge, 고상.처리=젖소.처리+한육우.처리)
 merge <- mutate(merge, 고상.합계.차이=고상.분뇨-고상.처리)
 merge <- mutate(merge, 합계.차이=합계.분뇨-합계.처리)
 
+# 농지 ####
+farmland <- readxl::read_excel("farmland.xlsx")
+head(farmland,30)
+merge1 <- merge(merge,farmland,by.x="A2",by.y="시군구",all=TRUE)
+
+merge <- arrange(merge1, group, order)
+merge$계[is.na(merge$계)] <- 0
+merge$논[is.na(merge$논)] <- 0
+merge$밭[is.na(merge$밭)] <- 0
+
 #
 save(merge, file="simple.Rdata")

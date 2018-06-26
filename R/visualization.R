@@ -19,12 +19,21 @@ print(p2)
 p3 <- ggplot(merge, aes(x=long,y=lat,group=group,fill=고상.처리)) + geom_polygon(colour="grey") + scale_fill_gradientn(colours=c('white','#67C8FF','blue'))+ expand_limits(x=merge$long,y=merge$lat)+ ggtitle("고상가축분뇨처리(톤/년)") + labs(fill="처리(톤/년)") 
 print(p3)
 
-# p4 <- ggplot(merge, aes(x=long,y=lat,group=group,fill=고상.처리)) + geom_polygon(colour="grey") + scale_fill_gradientn(colours=c('white','#58D68D','#186A3B'))+ expand_limits(x=merge$long,y=merge$lat)+ ggtitle("경작지 면적") + labs(fill="경작지 면적") + theme(axis.line=element_blank(),axis.text.x=element_blank(),axis.text.y=element_blank(),axis.ticks=element_blank(),axis.title.x=element_blank(),axis.title.y=element_blank())
-# print(p4)
+p4 <- ggplot(merge, aes(x=long,y=lat,group=group,fill=계)) + geom_polygon(colour="grey") + scale_fill_gradientn(colours=c('white','#58D68D','#186A3B'))+ expand_limits(x=merge$long,y=merge$lat)+ ggtitle("경작지 면적") + labs(fill="경작지 면적") + theme(axis.line=element_blank(),axis.text.x=element_blank(),axis.text.y=element_blank(),axis.ticks=element_blank(),axis.title.x=element_blank(),axis.title.y=element_blank())
+print(p4)
+
+p5 <- ggplot(merge, aes(x=long,y=lat,group=group,fill=논)) + geom_polygon(colour="grey") + scale_fill_gradientn(colours=c('white','#58D68D','#186A3B'))+ expand_limits(x=merge$long,y=merge$lat)+ ggtitle("경작지 면적(논)") + labs(fill="경작지 면적") + theme(axis.line=element_blank(),axis.text.x=element_blank(),axis.text.y=element_blank(),axis.ticks=element_blank(),axis.title.x=element_blank(),axis.title.y=element_blank())
+print(p5)
+
+p6 <- ggplot(merge, aes(x=long,y=lat,group=group,fill=밭)) + geom_polygon(colour="grey") + scale_fill_gradientn(colours=c('white','#58D68D','#186A3B'))+ expand_limits(x=merge$long,y=merge$lat)+ ggtitle("경작지 면적(밭)") + labs(fill="경작지 면적") + theme(axis.line=element_blank(),axis.text.x=element_blank(),axis.text.y=element_blank(),axis.ticks=element_blank(),axis.title.x=element_blank(),axis.title.y=element_blank())
+print(p6)
 
 ggsave("generation.png",plot=p1,dpi=300)
 ggsave("diff.png",plot=p2,dpi=300)
 ggsave("treated.png",plot=p3,dpi=300)
+
+ggsave("논.png",plot=p5,dpi=300)
+ggsave("밭.png",plot=p6,dpi=300)
 
 group <- group_by(merge, A2) %>% summarise(발생량=round(mean(고상.분뇨),0),처리량=round(mean(고상.처리),0))
 result <- mutate(group, 차이=발생량-처리량)
